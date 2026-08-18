@@ -1,0 +1,492 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Poppins", sans-serif;
+    background-color: #faf9f6;
+    color: #333;
+}
+
+
+.navbar {
+    height: 75px;
+    padding: 0 7%;
+ background-color:#DDE5D5;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: 600;
+    color: #333;
+}
+
+.logo span {
+    color:#C49A5A ;
+}
+
+.nav-links {
+    display: flex;
+    gap: 30px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #555;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    color:#C49A5A ;
+}
+.hero {
+    height: 350px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    padding: 20px;
+
+    background-color: #26382D;
+
+    color:#faf9f6;
+}
+.hero-content {
+    max-width: 700px;
+}
+.hero-content p {
+    font-size: 13px;
+
+    letter-spacing: 3px;
+
+    margin-bottom: 15px;
+
+    color: #8b6f47;
+}
+.hero-content>p:first-child {
+    font-size: 12px;
+
+    letter-spacing: 3px;
+
+    margin-bottom: 15px;
+}
+.hero h1 {
+    font-size: 60px;
+
+    line-height: 1.1;
+
+    margin-bottom: 20px;
+}
+
+.hero h1 span {
+    display: block;
+    color: #C49A5A;
+}
+
+.hero-description {
+    font-size: 15px;
+
+    margin-bottom: 30px;
+
+    color: #eeeeee;
+}
+
+.scroll-btn {
+    display: inline-block;
+
+    padding: 12px 25px;
+
+    background-color: white;
+
+    color: #333;
+
+    text-decoration: none;
+
+    border-radius: 25px;
+
+    font-size: 14px;
+
+    transition: 0.3s;
+}
+
+.scroll-btn:hover {
+    background-color: #e9c46a;
+
+    color: white;
+
+    transform: translateY(-3px);
+}
+
+
+.gallery-section {
+    width: 90%;
+    max-width: 1200px;
+
+    margin: auto;
+
+    padding: 80px 0;
+}
+
+.gallery-heading{
+    text-align: center;
+
+    margin-bottom: 40px;
+}
+
+.gallery-heading p {
+    font-size: 12px;
+font-weight: bold;
+    letter-spacing: 3px;
+
+    color: #C49A5A;
+
+    margin-bottom: 8px;
+}
+
+.gallery-heading h2 {
+    font-size: 38px;
+}
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+}
+
+.gallery-item {
+    height: 260px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    cursor: pointer;
+
+    opacity: 1;
+    transform: scale(1);
+
+    transition:
+        opacity 0.35s ease,
+        transform 0.35s ease;
+}
+
+.gallery-item.hide {
+    display: none;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+
+    transition: transform 0.4s ease;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.05);
+}
+ .image-number {
+    position: absolute;
+
+    top: 15px;
+    right: 15px;
+
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: rgba(255, 255, 255, 0.85);
+
+    border-radius: 50%;
+
+    font-size: 12px;
+
+    color: #333;
+} 
+.lightbox {
+    display: none;
+
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background-color: rgba(0, 0, 0, 0.92);
+
+    z-index: 2000;
+
+    align-items: center;
+    justify-content: center;
+} 
+
+
+.lightbox.show {
+    display: flex;
+}
+
+
+.lightbox-content {
+    text-align: center;
+
+    max-width: 850px;
+
+    width: 80%;
+}
+
+
+
+.lightbox-content img {
+    width: 100%;
+
+    max-height: 70vh;
+
+    object-fit: contain;
+
+    border-radius: 8px;
+}
+
+
+.lightbox-details {
+    color: white;
+
+    margin-top: 15px;
+}
+
+.lightbox-details p {
+    color: #e9c46a;
+
+    font-size: 13px;
+
+    text-transform: uppercase;
+
+    letter-spacing: 2px;
+
+    margin-bottom: 5px;
+}
+
+.lightbox-details h2 {
+    font-size: 25px;
+}
+
+
+.close-btn {
+    position: absolute;
+
+    top: 25px;
+    right: 30px;
+
+    width: 45px;
+    height: 45px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background-color: rgba(255, 255, 255, 0.15);
+
+    color: white;
+
+    font-size: 20px;
+
+    cursor: pointer;
+}
+
+.close-btn:hover {
+    background-color: white;
+
+    color: #333;
+}
+
+
+.lightbox-arrow {
+    position: absolute;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    width: 50px;
+    height: 50px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background-color: rgba(255, 255, 255, 0.15);
+
+    color: white;
+
+    font-size: 18px;
+
+    cursor: pointer;
+}
+
+.lightbox-arrow:hover {
+    background-color: white;
+
+    color: #333;
+}
+
+
+.prev {
+    left: 30px;
+}
+
+
+.next {
+    right: 30px;
+}
+
+footer {
+    height: 75px;
+ background-color:#DDE5D5 ;
+     color:#000000;
+
+    text-align: center;
+
+    padding: 0 7%;
+}
+
+
+
+.footer-logo {
+    font-size: 25px;
+    font-weight: 600;
+    color: #333;
+}
+
+.footer-logo span {
+     color: #C49A5A;
+}
+.footer-content{
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+@media (max-width: 900px) {
+
+    .gallery {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .hero h1 {
+        font-size: 50px;
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    .navbar {
+        height: auto;
+
+        padding: 15px 5%;
+
+        flex-direction: column;
+
+        gap: 15px;
+    }
+
+
+    .nav-links {
+        gap: 15px;
+
+        flex-wrap: wrap;
+
+        justify-content: center;
+    }
+
+
+    .nav-links a {
+        font-size: 12px;
+    }
+
+
+    .hero {
+        height: 450px;
+    }
+
+
+    .hero h1 {
+        font-size: 40px;
+    }
+
+
+    .hero-description {
+        font-size: 13px;
+    }
+
+
+    .gallery-section {
+        width: 92%;
+
+        padding: 60px 0;
+    }
+
+
+    .gallery-heading h2 {
+        font-size: 30px;
+    }
+
+
+    .gallery {
+        grid-template-columns: 1fr;
+
+        gap: 15px;
+    }
+
+
+    .gallery-item {
+        height: 280px;
+    }
+
+
+    .lightbox-content {
+        width: 90%;
+    }
+
+
+    .lightbox-arrow {
+        width: 40px;
+        height: 40px;
+    }
+
+
+    .prev {
+        left: 10px;
+    }
+
+
+    .next {
+        right: 10px;
+    }
+
+
+    .close-btn {
+        top: 15px;
+        right: 15px;
+    }
+
+}
