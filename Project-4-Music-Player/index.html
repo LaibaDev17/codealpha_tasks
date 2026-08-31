@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Velora | Music Player</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+</head>
+
+<body>
+
+    <main class="app">
+
+        <!-- Header -->
+        <header class="header">
+
+            <div class="brand">
+                <div class="brand-icon">
+                    <i class="fa-solid fa-wave-square"></i>
+                </div>
+
+                <div>
+                    <h1>Velora</h1>
+                    <p>Your mood. Your music.</p>
+                </div>
+            </div>
+
+            <label class="add-music">
+                <i class="fa-solid fa-plus"></i>
+                Add Music
+                <input type="file" id="fileInput" accept="audio/*" multiple hidden>
+            </label>
+
+        </header>
+
+
+        <!-- Main Layout -->
+        <section class="content">
+
+            <!-- Player -->
+            <div class="player-card">
+
+                <div class="now-playing">
+                    NOW PLAYING
+                </div>
+
+                <div class="track-section">
+
+                    <div class="cover">
+                        <div class="cover-center">
+                            <i class="fa-solid fa-music"></i>
+                        </div>
+                    </div>
+
+                    <div class="track-details">
+
+                        <h2 id="title">Magical Forest</h2>
+
+                        <p id="artist">Velora Collection</p>
+
+                        <div class="visualizer">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Progress -->
+                <div class="progress-container">
+
+                    <div class="time-row">
+                        <span id="currentTime">0:00</span>
+                        <span id="duration">0:00</span>
+                    </div>
+
+                    <input
+                        type="range"
+                        id="progress"
+                        min="0"
+                        max="100"
+                        value="0"
+                    >
+
+                </div>
+
+
+                <!-- Controls -->
+                <div class="controls">
+
+                    <button id="shuffleBtn" class="small-control">
+                        <i class="fa-solid fa-shuffle"></i>
+                    </button>
+
+                    <button id="previousBtn">
+                        <i class="fa-solid fa-backward-step"></i>
+                    </button>
+
+                    <button id="playBtn" class="play-button">
+                        <i class="fa-solid fa-play"></i>
+                    </button>
+
+                    <button id="nextBtn">
+                        <i class="fa-solid fa-forward-step"></i>
+                    </button>
+
+                    <button id="repeatBtn" class="small-control">
+                        <i class="fa-solid fa-repeat"></i>
+                    </button>
+
+                </div>
+
+
+                <!-- Bottom Actions -->
+                <div class="player-actions">
+
+                    <button id="favoriteBtn">
+                        <i class="fa-regular fa-heart"></i>
+                        Favorite
+                    </button>
+
+                    <div class="volume">
+
+                        <i class="fa-solid fa-volume-low"></i>
+
+                        <input
+                            type="range"
+                            id="volume"
+                            min="0"
+                            max="1"
+                            step="0.01"
+                            value="1"
+                        >
+
+                        <i class="fa-solid fa-volume-high"></i>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Autoplay -->
+                <div class="settings">
+
+                    <label>
+                        <input type="checkbox" id="autoplay" checked>
+                        <span class="toggle"></span>
+                        Autoplay
+                    </label>
+
+                    <span class="playing-text" id="status">
+                        Ready to play
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- Playlist -->
+            <aside class="playlist-card">
+
+                <div class="playlist-heading">
+
+                    <div>
+                        <p>YOUR COLLECTION</p>
+                        <h2>Up Next</h2>
+                    </div>
+
+                    <span id="songCount">3 tracks</span>
+
+                </div>
+
+                <div id="playlist"></div>
+
+            </aside>
+
+        </section>
+
+
+        <footer>
+            <span>VELORA</span>
+            <p>Music that matches your moment </p>
+        </footer>
+
+        <audio id="audio"></audio>
+
+    </main>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
