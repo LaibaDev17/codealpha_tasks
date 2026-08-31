@@ -1,5 +1,4 @@
 const audio = document.getElementById("audio");
-
 const title = document.getElementById("title");
 const artist = document.getElementById("artist");
 
@@ -8,53 +7,43 @@ const previousBtn = document.getElementById("previousBtn");
 const nextBtn = document.getElementById("nextBtn");
 
 const progress = document.getElementById("progress");
-
 const currentTime = document.getElementById("currentTime");
 const duration = document.getElementById("duration");
 
 const volume = document.getElementById("volume");
-
 const playlist = document.getElementById("playlist");
-
 const fileInput = document.getElementById("fileInput");
 
 const favoriteBtn = document.getElementById("favoriteBtn");
-
 const shuffleBtn = document.getElementById("shuffleBtn");
-
 const repeatBtn = document.getElementById("repeatBtn");
-
 const autoplay = document.getElementById("autoplay");
 
 const statusText = document.getElementById("status");
-
 const visualizer = document.querySelector(".visualizer");
-
 const songCount = document.getElementById("songCount");
 
-
-// SONGS
-
+// SONGS ARRAY
 let songs = [
     {
         title: "Magical Forest",
-        artist: "Leyora Collection",
-        src: "music/song1.mp3"
+        artist: "Velora Collection",
+        src: "./music/song1.mp3"
     },
     {
         title: "With You",
-        artist: "Leyora Collection",
-        src: "music/song2.mp3"
+        artist: "Velora Collection",
+        src: "./music/song2.mp3"
     },
     {
         title: "Sunny Day",
-        artist: "Leyora Collection",
-        src: "music/song3.mp3"
+        artist: "Velora Collection",
+        src: "./music/song3.mp3"
     },
     {
         title: "From Here on In",
-        artist: "Leyora Collection",
-        src: "music/song4.mp3"
+        artist: "Velora Collection",
+        src: "./music/song4.mp3"
     }
 ];
 
@@ -62,12 +51,10 @@ let currentSong = 0;
 let isShuffle = false;
 let isRepeat = false;
 
-
 // INITIAL LOAD
 if (songs.length > 0) {
     loadSong(currentSong);
 }
-
 
 // LOAD SONG 
 function loadSong(index) {
@@ -86,31 +73,29 @@ function loadSong(index) {
     statusText.textContent = "Ready to play";
 }
 
-
 // PLAY 
 function playSong() {
     audio.play()
         .then(() => {
             playBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
-            visualizer.classList.remove("paused");
+            if (visualizer) visualizer.classList.remove("paused");
             statusText.textContent = "Now playing";
             updatePlaylist();
         })
-        .catch(() => {
-            statusText.textContent = "Add an audio file to start";
+        .catch((error) => {
+            console.log("Audio play issue:", error);
+            statusText.textContent = "Click play to start";
         });
 }
-
 
 // PAUSE 
 function pauseSong() {
     audio.pause();
     playBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
-    visualizer.classList.add("paused");
+    if (visualizer) visualizer.classList.add("paused");
     statusText.textContent = "Paused";
     updatePlaylist();
 }
-
 
 // PLAY / PAUSE BTN
 playBtn.addEventListener("click", () => {
@@ -120,7 +105,6 @@ playBtn.addEventListener("click", () => {
         pauseSong();
     }
 });
-
 
 // UPDATE PLAYLIST UI
 function updatePlaylist() {
@@ -157,7 +141,6 @@ function updatePlaylist() {
     }
 }
 
-
 // NEXT SONG
 function nextSong() {
     if (isShuffle) {
@@ -169,16 +152,16 @@ function nextSong() {
     playSong();
 }
 
-nextBtn.addEventListener("click", nextSong);
-
+if (nextBtn) nextBtn.addEventListener("click", nextSong);
 
 // PREVIOUS SONG
-previousBtn.addEventListener("click", () => {
-    currentSong = (currentSong - 1 + songs.length) % songs.length;
-    loadSong(currentSong);
-    playSong();
-});
-
+if (previousBtn) {
+    previousBtn.addEventListener("click", () => {
+        currentSong = (currentSong - 1 + songs.length) % songs.length;
+        loadSong(currentSong);
+        playSong();
+    });
+}
 
 // PROGRESS BAR TIME UPDATE
 audio.addEventListener("timeupdate", (e) => {
@@ -201,68 +184,75 @@ audio.addEventListener("timeupdate", (e) => {
     duration.textContent = `${durationMinutes}:${durationSeconds}`;
 });
 
-
 // SEEK BAR
-progress.addEventListener("input", (e) => {
-    const audioDuration = audio.duration;
-    audio.currentTime = (e.target.value / 100) * audioDuration;
-});
-
+if (progress) {
+    progress.addEventListener("input", (e) => {
+        const audioDuration = audio.duration;
+        audio.currentTime = (e.target.value / 100) * audioDuration;
+    });
+}
 
 // VOLUME CONTROL
-volume.addEventListener("input", (e) => {
-    audio.volume = e.target.value;
-});
-
+if (volume) {
+    volume.addEventListener("input", (e) => {
+        audio.volume = e.target.value;
+    });
+}
 
 // FILE UPLOAD (ADD MUSIC)
-fileInput.addEventListener("change", (e) => {
-    const files = e.target.files;
-    for (let i = 0; i < files.length; i++) {
-        const file = files[i];
-        songs.push({
-            title: file.name.replace(/\.[^/.]+$/, ""),
-            artist: "Local Track",
-            src: URL.createObjectURL(file)
-        });
-    }
-    updatePlaylist();
-});
-
+if (fileInput) {
+    fileInput.addEventListener("change", (e) => {
+        const files = e.target.files;
+        for (let i = 0; i < files.length; i++) {
+            const file = files[i];
+            songs.push({
+                title: file.name.replace(/\.[^/.]+$/, ""),
+                artist: "Local Track",
+                src: URL.createObjectURL(file)
+            });
+        }
+        updatePlaylist();
+    });
+}
 
 // SHUFFLE TOGGLE
-shuffleBtn.addEventListener("click", () => {
-    isShuffle = !isShuffle;
-    shuffleBtn.classList.toggle("active", isShuffle);
-});
-
+if (shuffleBtn) {
+    shuffleBtn.addEventListener("click", () => {
+        isShuffle = !isShuffle;
+        shuffleBtn.classList.toggle("active", isShuffle);
+    });
+}
 
 // REPEAT TOGGLE
-repeatBtn.addEventListener("click", () => {
-    isRepeat = !isRepeat;
-    repeatBtn.classList.toggle("active", isRepeat);
-});
-
+if (repeatBtn) {
+    repeatBtn.addEventListener("click", () => {
+        isRepeat = !isRepeat;
+        repeatBtn.classList.toggle("active", isRepeat);
+    });
+}
 
 // FAVORITE TOGGLE
-favoriteBtn.addEventListener("click", () => {
-    favoriteBtn.classList.toggle("favorite");
-    const icon = favoriteBtn.querySelector("i");
-    if (favoriteBtn.classList.contains("favorite")) {
-        icon.classList.remove("fa-regular");
-        icon.classList.add("fa-solid");
-    } else {
-        icon.classList.remove("fa-solid");
-        icon.classList.add("fa-regular");
-    }
-});
-
+if (favoriteBtn) {
+    favoriteBtn.addEventListener("click", () => {
+        favoriteBtn.classList.toggle("favorite");
+        const icon = favoriteBtn.querySelector("i");
+        if (icon) {
+            if (favoriteBtn.classList.contains("favorite")) {
+                icon.classList.remove("fa-regular");
+                icon.classList.add("fa-solid");
+            } else {
+                icon.classList.remove("fa-solid");
+                icon.classList.add("fa-regular");
+            }
+        }
+    });
+}
 
 // AUDIO ENDED EVENT (AUTOPLAY / REPEAT)
 audio.addEventListener("ended", () => {
     if (isRepeat) {
         playSong();
-    } else if (autoplay.checked) {
+    } else if (autoplay && autoplay.checked) {
         nextSong();
     } else {
         pauseSong();
